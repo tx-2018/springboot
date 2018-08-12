@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxw.dao.DeptMapper">
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="dept">
+		<selectKey resultType="long" order="AFTER" keyProperty="deptId">
+          	SELECT LAST_INSERT_ID()
+      	</selectKey>
+		INSERT INTO dept(name) VALUES(#{name})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="dept">
+		update dept set name = #{name} where deptId = #{deptId}
+	</update>
+	
+	<!-- 修改 -->
+	<delete id="deleteById" parameterType="long">
+		delete from dept where deptId = #{deptId}
+	</delete>
+	
+	<!-- 根据id获取详情 -->
+	<select id="getById" resultType="dept" parameterType="Long">
+		select deptId,name from dept where deptId = #{deptId}
+	</select>
+	
+	<!-- 获取列表 -->
+	<select id="list" resultType="dept" parameterType="dept">
+		select id,name from dept where name like concat('%',#{name},'%')
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="pageList" resultType="dept" parameterType="dept">
+		select id,name from dept where name like concat('%',#{name},'%')
+	</select>
+
+</mapper>
+ 
+
