@@ -30,10 +30,15 @@ public class DeptController {
 		return RespEntityGenerator.genSuccessResp(dept);
 	}
 	
-	@RequestMapping(value = "/dept", method = RequestMethod.GET)
+	@RequestMapping(value = "/dept", method = RequestMethod.POST)
 	public RespEntity add(@Valid Dept dept) throws Exception {
 		deptService.insert(dept);
 		return RespEntityGenerator.genSuccessResp();
 	}
-	
+
+	@RequestMapping(value="/dept", method=RequestMethod.GET)
+	public RespEntity list(Dept dept) throws Exception {
+		//Dept dept = deptService.getById(deptId);
+		return RespEntityGenerator.genSuccessResp(dept);
+	}
 }
